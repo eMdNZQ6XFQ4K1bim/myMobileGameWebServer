@@ -6,6 +6,7 @@ import * as firebaseAdmin from 'firebase-admin';
 import { ErrorMsg } from 'src/common/erros.type';
 import { UserInfo } from 'src/entities/userInfo.entity';
 import { Repository } from 'typeorm';
+import { AuthType } from './types/auth.type';
 
 @Injectable()
 export class AuthService {
@@ -49,5 +50,17 @@ export class AuthService {
         }, {
             expiresIn: this.configService.get('JWT_TIME')
         })
+    }
+
+    async GetTestAccessToken() {
+        if( this.configService.get('TEST_ADMIN_ENABLE') !== 'true') {
+            throw new HttpException(ErrorMsg.NOT_ENABLE_TEST_ADMIN , HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+
+        const testAdminUser = new UserInfo();
+        testAdminUser.userId = 0;
+        testAdminUser.userType = AuthType.ADMIN;
+
+        return { accessToken: this.GenerateAccessToken(testAdminUser)};
     }
 }
