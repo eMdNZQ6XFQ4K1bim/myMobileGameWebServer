@@ -17,6 +17,7 @@ async function bootstrap() {
       .addBearerAuth()
       .addTag('auth', '로그인 및 계정 설정')
       .addTag('users', '유저 정보 관리')
+      .addTag('items', '아이템 정보 관리')
       .build();
 
     const document = SwaggerModule.createDocument(app, swaggerConfigs)
