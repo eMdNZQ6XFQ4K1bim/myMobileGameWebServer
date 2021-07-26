@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { UserOwnItem } from "./userOwnItem.entity";
 import { UserToken } from "./userToken.entity";
 
 @Entity('userInfo', { schema: 'auth' })
@@ -23,4 +24,10 @@ export class UserInfo {
         (userToken) => userToken.userInfo
     )
     userTokens: UserToken[];
+
+    @OneToMany(
+        () => UserOwnItem,
+        (userOwnItem) => userOwnItem.userInfo
+    )
+    userOwnItems: UserOwnItem[];
 }
