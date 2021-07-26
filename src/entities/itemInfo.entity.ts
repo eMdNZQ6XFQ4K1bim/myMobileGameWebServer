@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsString } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { UserOwnItem } from "./userOwnItem.entity";
 
 @Entity('itemInfo')
 export class ItemInfo {
@@ -23,4 +24,10 @@ export class ItemInfo {
     @IsNumber()
     @Column('int', { name: 'maxQNTY', nullable: false, comment: "최대 보유 갯수" })
     maxQNTY: number;
+
+    @OneToMany(
+        () => UserOwnItem,
+        (userOwnItem) => userOwnItem.itemInfo,
+    )
+    userOwnItems: UserOwnItem[];
 }
