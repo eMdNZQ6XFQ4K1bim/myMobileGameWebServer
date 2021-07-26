@@ -15,9 +15,10 @@ async function bootstrap() {
       .setDescription('The my mobile web server API description')
       .setVersion('1.0')
       .addBearerAuth()
+      .addTag('auth', '로그인 및 계정 설정')
       .build();
 
-    const document = SwaggerModule.createDocument(app, swaggerConfigs);
+    const document = SwaggerModule.createDocument(app, swaggerConfigs)
     SwaggerModule.setup('api', app, document);
   }
 
