@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { UserInfo } from "./userInfo.entity";
 
 @Entity('userOwnItem')
@@ -17,7 +17,12 @@ export class UserOwnItem {
 
     @ManyToOne(
         () => UserInfo,
-        (userInfo) => userInfo.userOwnItems
+        (userInfo) => userInfo.userOwnItems,
+        {
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+        }
     )
+    @JoinColumn([{ name: 'userId', referencedColumnName: 'userId' }])
     userInfo: UserInfo;
 }
