@@ -58,7 +58,7 @@ export class AuthService {
         }
 
         const testAdminUser = new UserInfo();
-        testAdminUser.userId = 0;
+        testAdminUser.userId = 1;
         testAdminUser.userType = AuthType.ADMIN;
 
         return { accessToken: this.GenerateAccessToken(testAdminUser)};
